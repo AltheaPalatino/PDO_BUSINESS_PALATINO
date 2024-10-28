@@ -15,7 +15,6 @@ if (isset($_POST['insertStoreBtn'])) {
 	}
 }
 
-// Editing an existing store
 if (isset($_POST['editStoreBtn'])) {
 	$query = updateStore($pdo, $_POST['store_name'], $_POST['locations'], 
 		$_POST['contact_name'], $_GET['store_id']);
@@ -40,40 +39,37 @@ if (isset($_POST['deleteStoreBtn'])) {
 
 // Inserting a new customer
 if (isset($_POST['insertCustomerBtn'])) {
-		$query = insertCustomer($pdo, $_POST['customer_firstname'], $_POST['customer_lastname'], 
-			$_POST['email'], $_POST['phone_number'], $_GET['store_id']);
+	$query = insertCustomer($pdo, $_POST['customer_firstname'], $_POST['customer_lastname'], 
+		$_POST['email'], $_POST['phone_number'], $_GET['store_id']);
 
-		if ($query) {
-			header("Location: ../viewcustomers.php?store_id=" .$_GET['store_id']);
-		} else {
-			echo "Insertion failed";
-		}
+	if ($query) {
+		header("Location: ../viewcustomers.php?store_id=" . $_GET['store_id']);
+	} else {
+		echo "Insertion failed";
+	}
 }
 
 // Editing an existing customer
 if (isset($_POST['editCustomerBtn'])) {
-    
-        $query = updateCustomer($pdo, $_POST['customer_firstname'], $_POST['customer_lastname'], 
-            $_POST['email'], $_POST['phone_number'], $_GET['store_id'], $_GET['customer_id']); // Pass store_id from GET
+	$query = updateCustomer($pdo, $_POST['customer_firstname'], $_POST['customer_lastname'], 
+		$_POST['email'], $_POST['phone_number'], $_GET['store_id'], $_GET['customer_id']); 
 
-        if ($query) {
-            header("Location: ../viewcustomers.php?store_id=" .$_GET['store_id']);
-        } else {
-            echo "Update failed";
-        }
+	if ($query) {
+		header("Location: ../viewcustomers.php?store_id=" . $_GET['store_id']);
+	} else {
+		echo "Update failed";
+	}
 }
 
 // Deleting a customer
 if (isset($_POST['deleteCustomerBtn'])) {
-    // Remove extra code, ensure only customer_id is used
-    $query = deleteCustomer($pdo, $_GET['customer_id']);
+	$query = deleteCustomer($pdo, $_GET['customer_id']);
 
-    if ($query) {
-        header("Location: ../viewcustomers.php?store_id=" .$_GET['store_id']);
-    } else {
-        echo "Deletion failed";
-    }
+	if ($query) {
+		header("Location: ../viewcustomers.php?store_id=" . $_GET['store_id']);
+	} else {
+		echo "Deletion failed";
+	}
 }
-
 
 ?>
